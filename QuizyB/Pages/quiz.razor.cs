@@ -2,6 +2,6 @@
 
 namespace QuizyB.Pages;
 
-public partial class Quiz : ComponentBase
+public partial class quiz : ComponentBase
 {
 }

@@ -6,3 +6,6 @@ Optional:
 Tipp: benutze den Topic deiner Route um die enstprechende Json zu laden.
  
 Wichtig: Es ist nicht ziel den ganzen code zu kopieren sondern den bestehenden code so anzupassen das die Fragen nach ihren Thema gestellt werden.
+
+quiz/Computerspiele
+quiz/Wunder_der_Technik
