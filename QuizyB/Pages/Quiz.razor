@@ -3,11 +3,14 @@
 @inject QuizService QuizService
 
 <div class="quiz-container">
-    @if (QuizService.CurrentQuestion != null)
+    @if (QuizService.CurrentQuestion != null && !QuizService.IsFinished)
     {
+        <h3>
+            Es sind noch @QuizService.QuestionsToSolve Fragen zu lösen
+        </h3>
         <h3>Punktzahl: @_points</h3>
-        <h3>@QuizService.CurrentQuestion.QuestionText</h3>
-        <h4>Antwort</h4>
+        <h3>Frage: @QuizService.CurrentQuestion.QuestionText</h3>
+        <h4>Antworten:</h4>
         @if (QuizService.CurrentQuestion.Answers != null)
         {
             for (var i = 0; i < QuizService.CurrentQuestion.Answers.Count; i++)
@@ -36,6 +39,14 @@
     {
         <h1>Es gibt, zumindest noch nicht, kein Quiz für das Thema: "@Section" </h1>
     }
+    else if (QuizService.Questions.Count == 0 && QuizService.QuizLoadedSuccessfully)
+    {
+        <h1>Sie haben das Quiz mit dem Thema "@Section" mit @_points von möglichen @QuizService.MaxQuestionsCount Punkten abgeschlossen!</h1>
+    }
+    else if (!QuizService.QuizLoadedSuccessfully && !QuizService.IsLoadingQuiz)
+    {
+        <h1>Hoppala do isch was schief gloffe, meldsch di bei deim Adminischdrator, ja?</h1>
+    }
     else
     {
         <p>Loading...</p>
@@ -51,6 +62,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        if (Section == null) return;
         _points = 0;
         Is404 = false;
         QuizService.Reset();

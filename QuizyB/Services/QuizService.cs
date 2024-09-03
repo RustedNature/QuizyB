@@ -13,18 +13,24 @@ public class QuizService
         _httpClient = httpClient;
     }
 
-    public Question? CurrentQuestion { get; set; }
-    private List<Question> Questions { get; set; } = [];
+    public Question? CurrentQuestion { get; private set; }
+    internal List<Question> Questions { get; set; } = [];
 
+    internal int QuestionsToSolve { get; private set; }
+    internal int MaxQuestionsCount { get; set; }
     public bool IsAnswered { get; set; }
     public bool IsCorrect { get; set; }
+    public bool QuizLoadedSuccessfully { get; set; }
+    public bool IsLoadingQuiz { get; set; }
+
+    public bool IsFinished { get; set; }
 
     public void NextQuestion()
     {
-        Questions.Remove(CurrentQuestion!);
         IsAnswered = false;
         IsCorrect = false;
         RandomQuestion();
+        if (Questions.Count == 0) IsFinished = true;
     }
 
     private void RandomQuestion()
@@ -36,16 +42,29 @@ public class QuizService
 
     public async Task LoadQuestions(string? url)
     {
+        IsLoadingQuiz = true;
         try
         {
             var json = await _httpClient.GetStringAsync(url);
             Questions = JsonSerializer.Deserialize<List<Question>>(json)!;
+            MaxQuestionsCount = Questions.Count;
+            QuizLoadedSuccessfully = true;
+            QuestionsToSolve = Questions.Count;
+            RandomizeAnswerIndexes();
             RandomQuestion();
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error loading questions: {ex.Message}");
         }
+        finally
+        {
+            IsLoadingQuiz = false;
+        }
+    }
+
+    private void RandomizeAnswerIndexes()
+    {
     }
 
     public string GetButtonTheme(int index)
@@ -66,6 +85,8 @@ public class QuizService
             points++;
         }
 
+        Questions.Remove(CurrentQuestion!);
+        QuestionsToSolve--;
         IsAnswered = true;
     }
 
@@ -75,6 +96,8 @@ public class QuizService
         Questions = [];
         IsAnswered = false;
         IsCorrect = false;
+        QuizLoadedSuccessfully = false;
+        IsFinished = false;
     }
 }
 
