@@ -1,0 +1,142 @@
+﻿[
+    {
+        "questionText": "Alexander Graham Bell war der Erste, der ein Patent hierfür erhielt. Worum geht es?",
+        "answers": [ "Radio", "Telefon", "Computer", "Glühbirne" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Auf der wie vielten 'Großen Deutschen Funk-Ausstellung' wurde das Farbfernsehen in Deutschland gestartet?",
+        "answers": [ "25.", "30.", "10.", "15." ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Auf welcher Strecke fuhr die erste deutsche Pferdebahn?",
+        "answers": [ "Köln-Bonn", "Hamburg-Altona", "München-Nymphenburg", "Berlin-Charlottenburg" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "Aus welchem Land kommt das Technologieunternehmen HTC?",
+        "answers": [ "Taiwan", "Südkorea", "Japan", "China" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Das US-Verteidigungsministerium entwickelte in den 1970-er Jahren ein Positionierungssystem mit dem Namen NAVSTAR...?",
+        "answers": [ "GPS", "LIDAR", "SONAR", "RADAR" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Die Kamera hat ihren Namen von lateinischen Wort 'Camera Obscura'. Was bedeutet das übersetzt?",
+        "answers": [ "Geheimer Ort", "Großes Auge", "Dunkler Raum", "Helle Kammer" ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "questionText": "Die Raumsonde welchen Landes landete als erste auf der Venus?",
+        "answers": [ "Japan", "USA", "China", "Sowjetunion" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "Durch welches Material wird bei einem Saxophon der Ton erzeugt?",
+        "answers": [ "Plastik", "Metall", "Holz", "Glas" ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "questionText": "Ein Fahrzeug mit Elektromotor gewinnt beim Bremsen Energie zurück. Wie nennt man diesen Vorgang?",
+        "answers": [ "Transformation", "Rekuperation", "Inversion", "Induktion" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Für welche Industrie war die 'Spinning Jenny' eine wichtige Erfindung?",
+        "answers": [ "Schiffbau", "Textilindustrie", "Bergbau", "Automobilindustrie" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Geostationäre Satelliten befinden sich idealerweise immer über demselben Punkt der Erdoberfläche. In welcher Höhe befinden sie sich?",
+        "answers": [ "Ca. 36.000 km", "Ca. 12.000 km", "Ca. 60.000 km", "Ca. 5.000 km" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Im Winter 1879 zeigte Thomas Alva Edison den/die/das erste/n funktionierende/n...?",
+        "answers": [ "Schreibmaschine", "Telefon", "Glühlampe", "Radio" ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "questionText": "In welchem Handwerk wird ein sogenannter 'Schütze' verwendet?",
+        "answers": [ "Schreinerei", "Töpferei", "Schmiedekunst", "Weberei" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "In welchem Jahr erfand Fahrenheit das erste Thermometer?",
+        "answers": [ "1756", "1665", "1802", "1724" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "In welchem Jahr erfand Stephen Hales das erste Blutdruckmessgerät?",
+        "answers": [ "1801", "1690", "1774", "1733" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "In welchem Jahr konstruierte Anders Celsius die Celsius-Skala?",
+        "answers": [ "1777", "1715", "1800", "1742" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "In welchem Jahr wurde das iPhone 4 veröffentlicht?",
+        "answers": [ "2008", "2010", "2006", "2012" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "In welchem Jahr wurde der letzte Commodore 64 produziert?",
+        "answers": [ "1987", "1994", "1997", "1990" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "In welchem Jahr wurde der 'Zauberwürfel', auch Rubik's Cube genannt, erfunden?",
+        "answers": [ "1968", "1982", "1974", "1979" ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "questionText": "In welchem Land hat die Steckdose drei Schlitze, die in einem Dreieck angeordnet sind?",
+        "answers": [ "Deutschland", "Frankreich", "England", "USA" ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "questionText": "In welchem technischen Bereich sind PAL, SECAM und NTSC verschiedene Systeme?",
+        "answers": [ "Telefonie", "Internet", "Radio", "Fernsehen" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "In welcher Stadt befindet sich das größte naturwissenschaftlich-technische Museum der Welt?",
+        "answers": [ "London", "München", "Berlin", "New York" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Jedes siebte Jahr wird der Eiffelturm in einer anderen Farbe gestrichen. Wie lange dauert der gesamte Vorgang ungefähr?",
+        "answers": [ "12 Monate", "24 Monate", "6 Monate", "20 Monate" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "Moderne TV-Geräte haben einen sogenannten LCD-Bildschirm. Wofür steht LCD?",
+        "answers": [ "Liquid Crystal Display", "Laser Color Display", "Light Compact Display", "Light Control Display" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Seit wann besteht in Deutschland Gurtpflicht für Pkw-Hersteller auf den Vordersitzen?",
+        "answers": [ "1974", "1985", "1969", "1980" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Unter welchem Namen ist 'Light Amplification by Stimulated Emission of Radiation' besser bekannt?",
+        "answers": [ "Laser", "Radar", "Taser", "X-Ray" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Von welchem Automobilhersteller stammt das Modell 'Navara'?",
+        "answers": [ "Ford", "Honda", "Toyota", "Nissan" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "Wann wurde das erste Patent auf einen Sicherheitsgurt angemeldet und zugelassen?",
+        "answers": [ "1927", "1903", "1915", "1899" ],
+        "correctAnswerIndex": 1
+    }
+]

@@ -1,0 +1,102 @@
+﻿[
+    {
+        "questionText": "Welches Land war kein Schauplatz eines Levels im Spiel 'Tomb-Raider-III'?",
+        "answers": [ "England", "Deutschland", "Indien", "Italien" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "Wie heißt der erste Pilz-ähnliche Feind, dem man in 'Super Mario Bros.' (1985) begegnet?",
+        "answers": [ "Koopas", "Piranha", "Boo", "Goombas" ],
+        "correctAnswerIndex": 3
+    },
+    {
+        "questionText": "Welches der folgenden Spiele erhielt viel Kritik, weil es sehr gewaltsam und unwirklich war?",
+        "answers": [ "Minecraft", "Soldier of Fortune", "Tetris", "Sonic the Hedgehog" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Wie heißt die Hauptfigur in 'Resindent Evil 4'?",
+        "answers": [ "Leon S. Kennedy", "Chris Redfield", "Jill Valentine", "Albert Wesker" ],
+        "correctAnswerIndex": 0
+    },
+  
+    {
+        "questionText": "Welches Unternehmen veröffentlichte und vertrieb die Videospiel-Reihe 'Halo'?",
+        "answers": [ "Sony", "Nintendo", "Microsoft Game Studios", "Sega" ],
+        "correctAnswerIndex": 2
+    },
+    
+    {
+        "questionText": "Wie nennt man es, wenn sich bei World of Warcraft zwei Spieler duellieren?",
+        "answers": [ "PvP", "PvE", "Coop", "DPS" ],
+        "correctAnswerIndex": 0
+    },
+    
+    {
+        "questionText": "Welches der folgenden ist KEIN Kampfspiel?",
+        "answers": [ "Street Fighter", "Civilization", "Mortal Kombat", "Tekken" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Wie lange dauerte die Entwicklung des Gratis-Spiels 'Team Fortress 2'?",
+        "answers": [ "2 Jahre", "5 Jahre", "9 Jahre", "12 Jahre" ],
+        "correctAnswerIndex": 2
+    },
+   
+    {
+        "questionText": "Wie heißt der Sohn von Alex Mason im Spiel 'Black Ops' aus der Call of Duty-Reihe?",
+        "answers": [ "David Mason", "John Price", "Frank Woods", "Alex Mason Jr." ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Im Juni 2013 erschien das Action-Adventure 'The Last of Us'. Wie heißt neben 'Joel' der weibliche Hauptcharakter des Spiels?",
+        "answers": [ "Ellie", "Sarah", "Marlene", "Tess" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Wie heißt die Hauptfigur im Action-RPG 'Mass Effect'?",
+        "answers": [ "Shepard", "Master Chief", "Garrus", "Liara" ],
+        "correctAnswerIndex": 0
+    },
+   
+    {
+        "questionText": "Wie heißt der grün gekleidete Held des Spiels 'Zelda'?",
+        "answers": [ "Link", "Zelda", "Ganon", "Sheik" ],
+        "correctAnswerIndex": 0
+    },
+    
+    {
+        "questionText": "In welchem Jahr kam die erste Videospiel-Konsole für den Heimgebrauch ('Magnavox Odyssey') auf den Markt?",
+        "answers": [ "1972", "1980", "1968", "1985" ],
+        "correctAnswerIndex": 0
+    },
+    
+    
+    {
+        "questionText": "Aus welcher Spiele-Serie erschien im Jahr 2006 das Spiel '...Double Agent'?",
+        "answers": [ "Splinter Cell", "Hitman", "Metal Gear", "Tom Clancy" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "Was ist wahr über das Spiel 'Beneath a Steel Sky', das im Jahr 1994 von Revolution entwickelt wurde?",
+        "answers": [ "Es ist ein Ego-Shooter", "Es ist ein Rennspiel", "Es ist ein Point & Click", "Es ist ein Rollenspiel" ],
+        "correctAnswerIndex": 2
+    },
+    {
+        "questionText": "Wie heißt die Hauptfigur im Spiel 'Final Fantasy IX'?",
+        "answers": [ "Zidane Tribal", "Cloud Strife", "Tidus", "Sephiroth" ],
+        "correctAnswerIndex": 0
+    },
+    {
+        "questionText": "In welcher Spiele-Serie kommt der Charakter 'Heihachi' vor?",
+        "answers": [ "Street Fighter", "Tekken", "Soul Calibur", "Mortal Kombat" ],
+        "correctAnswerIndex": 1
+    },
+    {
+        "questionText": "Was haben die Spiele 'Wolfenstein 3D', 'Quake' und 'Hexen' gemeinsam?",
+        "answers": [ "Rennspiele", "Ego-Shooter-Spiele", "Strategie-Spiele", "Puzzlespiele" ],
+        "correctAnswerIndex": 1
+    }
+    
+    
+]

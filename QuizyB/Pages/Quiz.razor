@@ -1,0 +1,119 @@
+﻿@page "/quiz"
+@using System.Diagnostics
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@inject HttpClient Http
+
+<div class="quiz-container">
+    @if (_currentQuestion != null)
+    {
+        <h3>@_currentQuestion.QuestionText</h3>
+        <h4>Antwort</h4>
+        @if (_currentQuestion.Answers != null)
+        {
+            for (var i = 0; i < _currentQuestion.Answers.Count; i++)
+            {
+                var answerIndex = i;
+                <button class="answer-button @GetButtonTheme(answerIndex)" @onclick="() => CheckAnswer(answerIndex)" disabled="@IsAnswered">
+                    @_currentQuestion.Answers[answerIndex]
+                </button>
+            }
+        }
+
+        @switch (IsAnswered)
+        {
+            case true when IsCorrect:
+                <h4>@_currentQuestion.Answers![_currentQuestion.CorrectAnswerIndex] ist die richtige Antwort</h4>
+                <button class="next-button" @onclick="NextQuestion"> Nächste Frage</button>
+                break;
+            case true when !IsCorrect:
+                <h4>@_currentQuestion.Answers![_currentQuestion.CorrectAnswerIndex] wäre die richtige Antwort gewesen</h4>
+                <button class="next-button" @onclick="NextQuestion"> Nächste Frage</button>
+                break;
+        }
+    }
+    else
+    {
+        <p>Loading...</p>
+    }
+</div>
+
+@code {
+    private List<Question> _questions = [];
+
+    private Question? _currentQuestion;
+
+    private bool IsAnswered { get; set; }
+    private bool IsCorrect { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadQuestions();
+        await base.OnInitializedAsync();
+    }
+
+    private void NextQuestion()
+    {
+        IsAnswered = false;
+        IsCorrect = false;
+        RandomQuestion();
+    }
+
+    private void RandomQuestion()
+    {
+        if (_questions.Count <= 0) return;
+        var randIndex = new Random().Next(_questions.Count);
+        _currentQuestion = _questions[randIndex];
+    }
+
+    private async Task LoadQuestions()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("data/games.json");
+            _questions = JsonSerializer.Deserialize<List<Question>>(json)!;
+            RandomQuestion();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error loading questions: {ex.Message}");
+        }
+    }
+
+    private string GetButtonTheme(int index)
+    {
+        if (!IsAnswered)
+        {
+            return "btn btn-primary";
+        }
+
+        if (index == _currentQuestion!.CorrectAnswerIndex)
+        {
+            return "btn btn-success";
+        }
+
+        return "btn btn-danger";
+    }
+
+    private void CheckAnswer(int chosenAnswerIndex)
+    {
+        if (_currentQuestion == null) return;
+        if (_currentQuestion.CorrectAnswerIndex == chosenAnswerIndex)
+        {
+            IsCorrect = true;
+        }
+
+        IsAnswered = true;
+    }
+
+    public class Question
+    {
+        [JsonPropertyName("questionText")] public string? QuestionText { get; set; }
+
+        [JsonPropertyName("answers")] public List<string>? Answers { get; set; }
+
+        [JsonPropertyName("correctAnswerIndex")]
+        public int CorrectAnswerIndex { get; set; }
+    }
+
+}
