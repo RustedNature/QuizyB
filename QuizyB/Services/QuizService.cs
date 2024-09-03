@@ -14,16 +14,16 @@ public class QuizService
     }
 
     public Question? CurrentQuestion { get; private set; }
-    internal List<Question> Questions { get; set; } = [];
+    internal List<Question> Questions { get; private set; } = [];
 
     internal int QuestionsToSolve { get; private set; }
-    internal int MaxQuestionsCount { get; set; }
-    public bool IsAnswered { get; set; }
-    public bool IsCorrect { get; set; }
-    public bool QuizLoadedSuccessfully { get; set; }
-    public bool IsLoadingQuiz { get; set; }
+    internal int MaxQuestionsCount { get; private set; }
+    public bool IsAnswered { get; private set; }
+    public bool IsCorrect { get; private set; }
+    public bool QuizLoadedSuccessfully { get; private set; }
+    public bool IsLoadingQuiz { get; private set; }
 
-    public bool IsFinished { get; set; }
+    public bool IsFinished { get; private set; }
 
     public void NextQuestion()
     {
