@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace QuizyB.Services;
 
-internal class QuizService
+public class QuizService
 {
     private readonly HttpClient _httpClient;
 
-    internal QuizService(HttpClient httpClient)
+    public QuizService(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }
@@ -130,11 +130,11 @@ internal class QuizService
     }
 }
 
-internal class Question
+public class Question
 {
-    [JsonPropertyName("questionText")] internal string? QuestionText { get; set; }
-    [JsonPropertyName("answers")] internal List<string>? Answers { get; set; }
+    [JsonPropertyName("questionText")] public string? QuestionText { get; set; }
+    [JsonPropertyName("answers")] public List<string>? Answers { get; set; }
 
     [JsonPropertyName("correctAnswerIndex")]
-    internal int CorrectAnswerIndex { get; set; }
+    public int CorrectAnswerIndex { get; set; }
 }
