@@ -15,20 +15,20 @@ public class QuizService
 
     public Question? CurrentQuestion { get; private set; }
     internal List<Question> Questions { get; private set; } = [];
-
-    internal int QuestionsToSolve { get; private set; }
-    internal int MaxQuestionsCount { get; private set; }
-    public bool IsAnswered { get; private set; }
-    public bool IsCorrect { get; private set; }
-    public bool QuizLoadedSuccessfully { get; private set; }
+    internal int RemainQuestionsToSolve { get; private set; }
+    internal int QuestionsPoolCount { get; private set; }
+    public bool IsQuestionAnswered { get; private set; }
+    public bool IsAnswerCorrect { get; private set; }
+    public bool IsQuizLoadedSuccessfully { get; private set; }
     public bool IsLoadingQuiz { get; private set; }
-
     public bool IsFinished { get; private set; }
+    public int Points { get; private set; }
+    public bool IsLastQuestion { get; private set; }
 
     public void NextQuestion()
     {
-        IsAnswered = false;
-        IsCorrect = false;
+        IsQuestionAnswered = false;
+        IsAnswerCorrect = false;
         RandomQuestion();
         if (Questions.Count == 0) IsFinished = true;
     }
@@ -38,6 +38,7 @@ public class QuizService
         if (Questions.Count <= 0) return;
         var randIndex = new Random().Next(Questions.Count);
         CurrentQuestion = Questions[randIndex];
+        SetIsLastQuestion();
     }
 
     public async Task LoadQuestions(string? url)
@@ -47,9 +48,9 @@ public class QuizService
         {
             var json = await _httpClient.GetStringAsync(url);
             Questions = JsonSerializer.Deserialize<List<Question>>(json)!;
-            MaxQuestionsCount = Questions.Count;
-            QuizLoadedSuccessfully = true;
-            QuestionsToSolve = Questions.Count;
+            QuestionsPoolCount = Questions.Count;
+            IsQuizLoadedSuccessfully = true;
+            RemainQuestionsToSolve = Questions.Count;
             RandomizeAnswerIndexes();
             RandomQuestion();
         }
@@ -66,55 +67,72 @@ public class QuizService
     private void RandomizeAnswerIndexes()
     {
         if (Questions.Count <= 0) return;
+        var random = new Random();
         foreach (var question in Questions)
         {
-            var rightAnswer = question.Answers![question.CorrectAnswerIndex];
+            var correctAnswer = question.Answers![question.CorrectAnswerIndex];
             question.Answers = question.Answers
-                .OrderBy(x => new Random().Next())
+                .OrderBy(_ => random.Next())
                 .ToList();
-            
-            question.CorrectAnswerIndex = question.Answers.FindIndex(x => x == rightAnswer);
+
+            SetNewCorrectAnswerIndex(question, correctAnswer);
         }
+    }
+
+    private void SetNewCorrectAnswerIndex(Question question, string correctAnswer)
+    {
+        question.CorrectAnswerIndex = question.Answers!.FindIndex(answer => answer == correctAnswer);
     }
 
     public string GetButtonTheme(int index)
     {
-        if (!IsAnswered) return "btn btn-primary";
+        if (!IsQuestionAnswered) return "btn btn-primary";
 
         if (index == CurrentQuestion!.CorrectAnswerIndex) return "btn btn-success";
 
         return "btn btn-danger";
     }
 
-    public void CheckAnswer(int chosenAnswerIndex, ref int points)
+    public void CheckAnswer(int chosenAnswerIndex)
     {
         if (CurrentQuestion == null) return;
         if (CurrentQuestion.CorrectAnswerIndex == chosenAnswerIndex)
         {
-            IsCorrect = true;
-            points++;
+            IsAnswerCorrect = true;
+            Points++;
         }
 
+        RemoveCurrentQuestionFromPool();
+        RemainQuestionsToSolve--;
+        IsQuestionAnswered = true;
+    }
+
+    private void SetIsLastQuestion()
+    {
+        if (Questions.Count == 1) IsLastQuestion = true;
+    }
+
+    private void RemoveCurrentQuestionFromPool()
+    {
         Questions.Remove(CurrentQuestion!);
-        QuestionsToSolve--;
-        IsAnswered = true;
     }
 
     public void Reset()
     {
         CurrentQuestion = null;
         Questions = [];
-        IsAnswered = false;
-        IsCorrect = false;
-        QuizLoadedSuccessfully = false;
+        IsQuestionAnswered = false;
+        IsAnswerCorrect = false;
+        IsQuizLoadedSuccessfully = false;
         IsFinished = false;
+        IsLastQuestion = false;
+        Points = 0;
     }
 }
 
 public class Question
 {
     [JsonPropertyName("questionText")] public string? QuestionText { get; set; }
-
     [JsonPropertyName("answers")] public List<string>? Answers { get; set; }
 
     [JsonPropertyName("correctAnswerIndex")]

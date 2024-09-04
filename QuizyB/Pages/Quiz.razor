@@ -8,12 +8,16 @@
         <div class="quiz-container-header">
 
             <h4 class="questions-left">
-                Es sind noch @QuizService.QuestionsToSolve Fragen zu lösen
+                Es sind noch @QuizService.RemainQuestionsToSolve Fragen zu lösen
             </h4>
-            <h4 class="points">Punktzahl: @_points</h4>
+            <h4 class="points">
+                Punktzahl: @QuizService.Points
+            </h4>
         </div>
         <div class="question-container">
-            <h3 class="question"> @QuizService.CurrentQuestion.QuestionText </h3>
+            <h3 class="question">
+                @QuizService.CurrentQuestion.QuestionText
+            </h3>
         </div>
         <div class="answer-container">
             @if (QuizService.CurrentQuestion.Answers != null)
@@ -22,41 +26,65 @@
                 {
                     var answerIndex = i;
                     <button class="answer-button @QuizService.GetButtonTheme(answerIndex)"
-                            @onclick="() => QuizService.CheckAnswer(answerIndex, ref _points)" disabled="@QuizService.IsAnswered">
+                            @onclick="() => QuizService.CheckAnswer(answerIndex)" disabled="@QuizService.IsQuestionAnswered">
                         @QuizService.CurrentQuestion.Answers[answerIndex]
                     </button>
                 }
             }
         </div>
-
-        @switch (QuizService.IsAnswered)
+        @if (QuizService.IsLastQuestion)
         {
-            case true when QuizService.IsCorrect:
-                <h4 class="answer correct-answer">@QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] ist die richtige Antwort</h4>
-                <button class="next-button btn btn-primary" @onclick="QuizService.NextQuestion"> Nächste Frage</button>
+            SetNextButtonTextToEndOverview();
+        }
+
+        @switch (QuizService.IsQuestionAnswered)
+        {
+            case true when QuizService.IsAnswerCorrect:
+                <h4 class="answer correct-answer">
+                    @QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] ist die richtige Antwort
+                </h4>
+                <button class="next-button btn btn-primary" @onclick="QuizService.NextQuestion">
+                    @NextButtonText
+                </button>
                 break;
-            case true when !QuizService.IsCorrect:
-                <h4 class="answer incorrect-answer">@QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] wäre die richtige Antwort gewesen</h4>
-                <button class="next-button btn btn-primary" @onclick="QuizService.NextQuestion"> Nächste Frage</button>
+            case true when !QuizService.IsAnswerCorrect:
+                <h4 class="answer incorrect-answer">
+                    @QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] wäre die richtige Antwort gewesen
+                </h4>
+                <button class="next-button btn btn-primary" @onclick="QuizService.NextQuestion">
+                    @NextButtonText
+                </button>
                 break;
         }
     }
     else if (Is404)
     {
-        <h1 class="not-found">Es gibt kein Quiz, zumindest noch nicht, für das Thema: "@Section" </h1>
+        <h1 class="not-found">
+            Es gibt kein Quiz, zumindest noch nicht, für das Thema: <b>@Section</b>
+        </h1>
     }
-    else if (QuizService.Questions.Count == 0 && QuizService.QuizLoadedSuccessfully)
+    else if (QuizService.Questions.Count == 0 && QuizService.IsQuizLoadedSuccessfully)
     {
-        <h1 class="finished">Sie haben das Quiz mit dem Thema "@Section" mit @_points von möglichen @QuizService.MaxQuestionsCount Punkten abgeschlossen!</h1>
-        <button class="reset-button btn btn-primary" @onclick="LoadQuizForSection">Reset</button>
+        <h1 class="finished">
+            Sie haben das Quiz mit dem Thema <b>@Section </b> mit @QuizService.Points
+            von möglichen @QuizService.QuestionsPoolCount Punkten abgeschlossen!
+        </h1>
+        NextButtonText = NextQuestionButtonText;
+        <button class="reset-button btn btn-primary" @onclick="LoadQuizForSection">
+            Reset
+        </button>
     }
-    else if (!QuizService.QuizLoadedSuccessfully && !QuizService.IsLoadingQuiz)
+    else if (!QuizService.IsQuizLoadedSuccessfully && !QuizService.IsLoadingQuiz)
     {
-        <h1 class="error">Hoppala do isch was schief gloffe, meldsch di bei deim Adminischdrator, ja?</h1>
+        <h1 class="error">
+            Hoppala do isch was schief gloffe, meldsch di bei deim Adminischdrator, ja?
+        </h1>
     }
     else
     {
-        <p>Loading...</p>
+        <p>
+            Loading...
+        </p>
     }
 
 </div>
@@ -64,7 +92,9 @@
 @code {
     [Parameter] public string? Section { get; set; }
     private bool Is404 { get; set; }
-    private int _points;
+    private const string NextQuestionButtonText = "Nächste Frage";
+    private const string EndOverviewButtonText = "Endergebnis Anzeigen";
+    private string NextButtonText { get; set; } = NextQuestionButtonText;
 
 
     protected override async Task OnParametersSetAsync()
@@ -76,7 +106,6 @@
     private async Task LoadQuizForSection()
     {
         if (Section == null) return;
-        _points = 0;
         Is404 = false;
         QuizService.Reset();
         switch (Section.ToLower())
@@ -91,6 +120,11 @@
                 Is404 = true;
                 break;
         }
+    }
+
+    private void SetNextButtonTextToEndOverview()
+    {
+        NextButtonText = EndOverviewButtonText;
     }
 
 }
