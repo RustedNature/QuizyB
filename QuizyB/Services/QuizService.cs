@@ -4,28 +4,28 @@ using System.Text.Json.Serialization;
 
 namespace QuizyB.Services;
 
-public class QuizService
+internal class QuizService
 {
     private readonly HttpClient _httpClient;
 
-    public QuizService(HttpClient httpClient)
+    internal QuizService(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }
 
-    public Question? CurrentQuestion { get; private set; }
+    internal Question? CurrentQuestion { get; private set; }
     internal List<Question> Questions { get; private set; } = [];
     internal int RemainQuestionsToSolve { get; private set; }
     internal int QuestionsPoolCount { get; private set; }
-    public bool IsQuestionAnswered { get; private set; }
-    public bool IsAnswerCorrect { get; private set; }
-    public bool IsQuizLoadedSuccessfully { get; private set; }
-    public bool IsLoadingQuiz { get; private set; }
-    public bool IsFinished { get; private set; }
-    public int Points { get; private set; }
-    public bool IsLastQuestion { get; private set; }
+    internal int Points { get; private set; }
+    internal bool IsQuestionAnswered { get; private set; }
+    internal bool IsAnswerCorrect { get; private set; }
+    internal bool IsQuizLoadedSuccessfully { get; private set; }
+    internal bool IsLoadingQuiz { get; private set; }
+    internal bool IsFinished { get; private set; }
+    internal bool IsLastQuestion { get; private set; }
 
-    public void NextQuestion()
+    internal void NextQuestion()
     {
         IsQuestionAnswered = false;
         IsAnswerCorrect = false;
@@ -41,7 +41,7 @@ public class QuizService
         SetIsLastQuestion();
     }
 
-    public async Task LoadQuestions(string? url)
+    internal async Task LoadQuestions(string? url)
     {
         IsLoadingQuiz = true;
         try
@@ -84,7 +84,7 @@ public class QuizService
         question.CorrectAnswerIndex = question.Answers!.FindIndex(answer => answer == correctAnswer);
     }
 
-    public string GetButtonTheme(int index)
+    internal string GetButtonTheme(int index)
     {
         if (!IsQuestionAnswered) return "btn btn-primary";
 
@@ -93,7 +93,7 @@ public class QuizService
         return "btn btn-danger";
     }
 
-    public void CheckAnswer(int chosenAnswerIndex)
+    internal void CheckAnswer(int chosenAnswerIndex)
     {
         if (CurrentQuestion == null) return;
         if (CurrentQuestion.CorrectAnswerIndex == chosenAnswerIndex)
@@ -117,7 +117,7 @@ public class QuizService
         Questions.Remove(CurrentQuestion!);
     }
 
-    public void Reset()
+    internal void Reset()
     {
         CurrentQuestion = null;
         Questions = [];
@@ -130,11 +130,11 @@ public class QuizService
     }
 }
 
-public class Question
+internal class Question
 {
-    [JsonPropertyName("questionText")] public string? QuestionText { get; set; }
-    [JsonPropertyName("answers")] public List<string>? Answers { get; set; }
+    [JsonPropertyName("questionText")] internal string? QuestionText { get; set; }
+    [JsonPropertyName("answers")] internal List<string>? Answers { get; set; }
 
     [JsonPropertyName("correctAnswerIndex")]
-    public int CorrectAnswerIndex { get; set; }
+    internal int CorrectAnswerIndex { get; set; }
 }
