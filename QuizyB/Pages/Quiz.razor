@@ -2,51 +2,57 @@
 @using QuizyB.Services
 @inject QuizService QuizService
 
-<div class="quiz-container">
+<div class="container quiz-container">
     @if (QuizService.CurrentQuestion != null && !QuizService.IsFinished)
     {
-        <h3>
-            Es sind noch @QuizService.QuestionsToSolve Fragen zu lösen
-        </h3>
-        <h3>Punktzahl: @_points</h3>
-        <h3>Frage: @QuizService.CurrentQuestion.QuestionText</h3>
-        <h4>Antworten:</h4>
-        @if (QuizService.CurrentQuestion.Answers != null)
-        {
-            for (var i = 0; i < QuizService.CurrentQuestion.Answers.Count; i++)
+        <div class="quiz-container-header">
+
+            <h3 class="questions-left">
+                Es sind noch @QuizService.QuestionsToSolve Fragen zu lösen
+            </h3>
+            <h3 class="points">Punktzahl: @_points</h3>
+        </div>
+        <div class="question-container">
+            <h3 class="question">  @QuizService.CurrentQuestion.QuestionText </h3>
+        </div>
+        <div class="answer-container">
+            @if (QuizService.CurrentQuestion.Answers != null)
             {
-                var answerIndex = i;
-                <button class="answer-button @QuizService.GetButtonTheme(answerIndex)"
-                        @onclick="() => QuizService.CheckAnswer(answerIndex, ref _points)" disabled="@QuizService.IsAnswered">
-                    @QuizService.CurrentQuestion.Answers[answerIndex]
-                </button>
+                for (var i = 0; i < QuizService.CurrentQuestion.Answers.Count; i++)
+                {
+                    var answerIndex = i;
+                    <button class="answer-button @QuizService.GetButtonTheme(answerIndex)"
+                            @onclick="() => QuizService.CheckAnswer(answerIndex, ref _points)" disabled="@QuizService.IsAnswered">
+                        @QuizService.CurrentQuestion.Answers[answerIndex]
+                    </button>
+                }
             }
-        }
+        </div>
 
         @switch (QuizService.IsAnswered)
         {
             case true when QuizService.IsCorrect:
-                <h4>@QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] ist die richtige Antwort</h4>
-                <button class="next-button" @onclick="QuizService.NextQuestion"> Nächste Frage</button>
+                <h4 class="answer correct-answer">@QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] ist die richtige Antwort</h4>
+                <button class="next-button btn btn-primary" @onclick="QuizService.NextQuestion"> Nächste Frage</button>
                 break;
             case true when !QuizService.IsCorrect:
-                <h4>@QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] wäre die richtige Antwort gewesen</h4>
-                <button class="next-button" @onclick="QuizService.NextQuestion"> Nächste Frage</button>
+                <h4 class="answer incorrect-answer">@QuizService.CurrentQuestion.Answers![QuizService.CurrentQuestion.CorrectAnswerIndex] wäre die richtige Antwort gewesen</h4>
+                <button class="next-button btn btn-primary" @onclick="QuizService.NextQuestion"> Nächste Frage</button>
                 break;
         }
     }
     else if (Is404)
     {
-        <h1>Es gibt kein Quiz, zumindest noch nicht, für das Thema: "@Section" </h1>
+        <h1 class="not-found">Es gibt kein Quiz, zumindest noch nicht, für das Thema: "@Section" </h1>
     }
     else if (QuizService.Questions.Count == 0 && QuizService.QuizLoadedSuccessfully)
     {
-        <h1>Sie haben das Quiz mit dem Thema "@Section" mit @_points von möglichen @QuizService.MaxQuestionsCount Punkten abgeschlossen!</h1>
-        <button @onclick="LoadQuizForSection">Reset</button>
+        <h1 class="finished">Sie haben das Quiz mit dem Thema "@Section" mit @_points von möglichen @QuizService.MaxQuestionsCount Punkten abgeschlossen!</h1>
+        <button class="reset-button btn btn-primary" @onclick="LoadQuizForSection">Reset</button>
     }
     else if (!QuizService.QuizLoadedSuccessfully && !QuizService.IsLoadingQuiz)
     {
-        <h1>Hoppala do isch was schief gloffe, meldsch di bei deim Adminischdrator, ja?</h1>
+        <h1 class="error">Hoppala do isch was schief gloffe, meldsch di bei deim Adminischdrator, ja?</h1>
     }
     else
     {
