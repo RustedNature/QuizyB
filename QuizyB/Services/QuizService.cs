@@ -65,6 +65,16 @@ public class QuizService
 
     private void RandomizeAnswerIndexes()
     {
+        if (Questions.Count <= 0) return;
+        foreach (var question in Questions)
+        {
+            var rightAnswer = question.Answers![question.CorrectAnswerIndex];
+            question.Answers = question.Answers
+                .OrderBy(x => new Random().Next())
+                .ToList();
+            
+            question.CorrectAnswerIndex = question.Answers.FindIndex(x => x == rightAnswer);
+        }
     }
 
     public string GetButtonTheme(int index)
