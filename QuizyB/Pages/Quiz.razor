@@ -37,11 +37,12 @@
     }
     else if (Is404)
     {
-        <h1>Es gibt, zumindest noch nicht, kein Quiz für das Thema: "@Section" </h1>
+        <h1>Es gibt kein Quiz, zumindest noch nicht, für das Thema: "@Section" </h1>
     }
     else if (QuizService.Questions.Count == 0 && QuizService.QuizLoadedSuccessfully)
     {
         <h1>Sie haben das Quiz mit dem Thema "@Section" mit @_points von möglichen @QuizService.MaxQuestionsCount Punkten abgeschlossen!</h1>
+        <button @onclick="LoadQuizForSection">Reset</button>
     }
     else if (!QuizService.QuizLoadedSuccessfully && !QuizService.IsLoadingQuiz)
     {
@@ -62,6 +63,12 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        await LoadQuizForSection();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadQuizForSection()
+    {
         if (Section == null) return;
         _points = 0;
         Is404 = false;
@@ -78,8 +85,6 @@
                 Is404 = true;
                 break;
         }
-
-        await base.OnInitializedAsync();
     }
 
 }
