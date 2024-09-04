@@ -7,13 +7,13 @@
     {
         <div class="quiz-container-header">
 
-            <h3 class="questions-left">
+            <h4 class="questions-left">
                 Es sind noch @QuizService.QuestionsToSolve Fragen zu lösen
-            </h3>
-            <h3 class="points">Punktzahl: @_points</h3>
+            </h4>
+            <h4 class="points">Punktzahl: @_points</h4>
         </div>
         <div class="question-container">
-            <h3 class="question">  @QuizService.CurrentQuestion.QuestionText </h3>
+            <h3 class="question"> @QuizService.CurrentQuestion.QuestionText </h3>
         </div>
         <div class="answer-container">
             @if (QuizService.CurrentQuestion.Answers != null)
