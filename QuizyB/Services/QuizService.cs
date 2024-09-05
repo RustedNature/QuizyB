@@ -15,7 +15,7 @@ public class QuizService
 
     internal Question? CurrentQuestion { get; private set; }
     internal List<Question> Questions { get; private set; } = [];
-    internal int RemainQuestionsToSolve { get; private set; }
+    internal int RemainingQuestionsToSolve { get; private set; }
     internal int QuestionsPoolCount { get; private set; }
     internal int Points { get; private set; }
     internal bool IsQuestionAnswered { get; private set; }
@@ -50,7 +50,7 @@ public class QuizService
             Questions = JsonSerializer.Deserialize<List<Question>>(json)!;
             QuestionsPoolCount = Questions.Count;
             IsQuizLoadedSuccessfully = true;
-            RemainQuestionsToSolve = Questions.Count;
+            RemainingQuestionsToSolve = Questions.Count;
             RandomizeAnswerIndexes();
             RandomQuestion();
         }
@@ -103,7 +103,7 @@ public class QuizService
         }
 
         RemoveCurrentQuestionFromPool();
-        RemainQuestionsToSolve--;
+        RemainingQuestionsToSolve--;
         IsQuestionAnswered = true;
     }
 

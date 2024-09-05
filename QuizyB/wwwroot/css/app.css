@@ -108,9 +108,10 @@ code {
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 5px;
-    padding: 20px;
+    border-radius: 1rem;
+    padding: 2rem;
     box-shadow: black 0 0 10px;
+
 }
 
 .quiz-container-header {
@@ -133,9 +134,9 @@ code {
 }
 
 .question-container {
-    margin-top: 20px;
+    margin-top: 2rem;
     border-bottom: #1a1e21 1px solid;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     text-align: center;
 }
 
@@ -147,7 +148,7 @@ code {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 1rem;
     justify-items: center;
     align-items: center;
     border-bottom: #1a1e21 1px solid;
@@ -163,8 +164,8 @@ code {
 }
 
 .answer {
-    margin-top: 20px;
-    border-radius: 5px;
+    margin-top: 2rem;
+    border-radius: 1rem;
     text-align: center;
     font-weight: bold;
 }

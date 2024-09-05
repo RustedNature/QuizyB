@@ -1,4 +1,4 @@
-﻿@page "/quiz/{section}"
+﻿@page "/QuizyB/{section}"
 @using QuizyB.Services
 @inject QuizService QuizService
 
@@ -8,7 +8,7 @@
         <div class="quiz-container-header">
 
             <h4 class="questions-left">
-                Es sind noch @QuizService.RemainQuestionsToSolve Fragen zu lösen
+                Es sind noch @QuizService.RemainingQuestionsToSolve Fragen zu lösen
             </h4>
             <h4 class="points">
                 Punktzahl: @QuizService.Points
